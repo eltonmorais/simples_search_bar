@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'app_bar_controller.dart';
 
-class SearchAppBar extends AppBar{
+class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   final Color statusBarColor;
   final Color primaryColor;
   final bool autoSelected;
   final AppBar mainAppBar;
   final Color mainTextColor;
+  final AppBarController appBarController;
 
   SearchAppBar({
     @required this.primaryColor,
@@ -14,11 +16,22 @@ class SearchAppBar extends AppBar{
     this.statusBarColor,
     this.autoSelected = false,
     @required this.mainAppBar,
+    @required this.appBarController,
   });
 
   @override
+  Size get preferredSize {
+    return Size.fromHeight(20.0);
+  }  
+  
   Widget build(BuildContext context) {
-    return null;
+    appBarController.stream.add(autoSelected);
+
+    if(appBarController.state){
+      return searchAppBar();
+    }else{
+      return showMainAppBar();
+    }
   }
 
   Widget showMainAppBar(){
@@ -40,7 +53,7 @@ class SearchAppBar extends AppBar{
           leading: InkWell(
             child: Icon(Icons.close),
             onTap: (){
-              print("try to close");
+              appBarController.stream.add(false);
             },
           ),
           backgroundColor: primaryColor,
