@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SearchAppBar extends StatelessWidget{
+class SearchAppBar extends AppBar{
 
   final Color statusBarColor;
   final Color primaryColor;
