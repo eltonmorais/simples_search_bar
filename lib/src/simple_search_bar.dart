@@ -4,14 +4,14 @@ import 'app_bar_controller.dart';
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   final Color statusBarColor;
-  final Color primaryColor;
+  final Color primary;
   final bool autoSelected;
   final AppBar mainAppBar;
   final Color mainTextColor;
   final AppBarController appBarController;
 
   SearchAppBar({
-    @required this.primaryColor,
+    @required this.primary,
     this.mainTextColor = Colors.white,
     this.statusBarColor,
     this.autoSelected = false,
@@ -46,7 +46,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
           decoration: BoxDecoration(
             color: statusBarColor != null
               ? statusBarColor
-              : primaryColor,
+              : primary,
           ),
         ),
         AppBar(
@@ -56,7 +56,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
               appBarController.stream.add(false);
             },
           ),
-          backgroundColor: primaryColor,
+          backgroundColor: primary,
           title: TextField(
             
           ),
