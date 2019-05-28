@@ -30,16 +30,18 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget build(BuildContext context) {
-    appBarController.stream.add(autoSelected);
+    // appBarController.stream.add(autoSelected);
 
     return StreamBuilder(
       stream: appBarController.stream.stream,
       builder: (BuildContext context, AsyncSnapshot<bool> snap) {
+        bool _show = autoSelected;
+
         if (snap.hasData) {
-          appBarController.state = snap.data;
+          _show = snap.data;
         }
 
-        if (appBarController.state) {
+        if (_show) {
           return searchAppBar(
             context: context,
           );

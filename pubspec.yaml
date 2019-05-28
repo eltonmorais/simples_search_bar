@@ -1,6 +1,6 @@
 name: simple_search_bar
 description: A simple yet functional flutter search bar. It's an AppBar that You can turn on a SearchBar. You could make that clicking on any element You want using the Controller Stream.
-version: 0.1.3
+version: 0.1.4
 author: Elton Morais <elton@marketinglucrativo.com.br>
 homepage: https://github.com/eltonmorais/simples_search_bar
 
