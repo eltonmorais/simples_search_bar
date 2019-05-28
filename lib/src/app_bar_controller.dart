@@ -3,7 +3,7 @@ import 'dart:async';
 
 class AppBarController {
 
-  bool state;
+  bool state = false;
   StreamController<bool> stream = StreamController<bool>.broadcast();
 
   AppBarController(){

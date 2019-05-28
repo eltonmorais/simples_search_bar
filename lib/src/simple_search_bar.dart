@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_bar_controller.dart';
 
-class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
-
+class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color statusBarColor;
   final Color primary;
   final bool autoSelected;
@@ -22,44 +21,51 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Size get preferredSize {
     return Size.fromHeight(20.0);
-  }  
-  
+  }
+
   Widget build(BuildContext context) {
     appBarController.stream.add(autoSelected);
 
-    if(appBarController.state){
-      return searchAppBar();
-    }else{
-      return showMainAppBar();
-    }
+    return StreamBuilder(
+      stream: appBarController.stream.stream,
+      builder: (BuildContext context, AsyncSnapshot<bool> snap) {
+        bool _local = false;
+
+        if (snap.hasData) {
+          _local = snap.data;
+        }
+
+        if (_local) {
+          return searchAppBar();
+        } else {
+          return showMainAppBar();
+        }
+      },
+    );
   }
 
-  Widget showMainAppBar(){
+  Widget showMainAppBar() {
     return mainAppBar;
   }
 
-  Widget searchAppBar({BuildContext context}){
+  Widget searchAppBar({BuildContext context}) {
     return Column(
       children: <Widget>[
         Container(
           height: MediaQuery.of(context).padding.top,
           decoration: BoxDecoration(
-            color: statusBarColor != null
-              ? statusBarColor
-              : primary,
+            color: statusBarColor != null ? statusBarColor : primary,
           ),
         ),
         AppBar(
           leading: InkWell(
             child: Icon(Icons.close),
-            onTap: (){
+            onTap: () {
               appBarController.stream.add(false);
             },
           ),
           backgroundColor: primary,
-          title: TextField(
-            
-          ),
+          title: TextField(),
         ),
       ],
     );
